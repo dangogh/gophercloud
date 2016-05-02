@@ -153,6 +153,9 @@ func (p Pager) AllPages() (Page, error) {
 					key = k
 				}
 			}
+			if _, ok := b[key].([]interface{}); !ok {
+				panic(fmt.Sprintf("b[%s] is not []interface{}: %+v", key, b[key]))
+			}
 			pagesSlice = append(pagesSlice, b[key].([]interface{})...)
 			return true, nil
 		})

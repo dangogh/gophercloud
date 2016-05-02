@@ -320,6 +320,11 @@ func TestListAddresses(t *testing.T) {
 	})
 	th.AssertNoErr(t, err)
 	th.CheckEquals(t, 1, pages)
+
+	p, err := ListAddresses(client.ServiceClient(), "asdfasdfasdf").AllPages()
+	actual, err := ExtractAddresses(p)
+	th.AssertNoErr(t, err)
+	th.CheckDeepEquals(t, expected, actual)
 }
 
 func TestListAddressesByNetwork(t *testing.T) {
